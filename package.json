@@ -1,0 +1,27 @@
+{
+  "name": "challenge-nodejs",
+  "version": "1.0.0",
+  "description": "Node JS challenge for Codigo del Sur",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "felipe-feijoo",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.1",
+    "cross-fetch": "^3.1.4",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.95.15",
+    "node-fetch": "^2.6.1",
+    "objection": "^3.0.0",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^3.0.3",
+    "nodemon": "^2.0.15"
+  }
+}
