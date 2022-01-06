@@ -8,6 +8,9 @@ const { Model } = require('objection');
 //DB INIT
 const databaseInitArchive = require('./src/util/databaseInit');
 const db = databaseInitArchive.db;
+
+//db.run('DROP TABLE movie');
+
 databaseInitArchive.dbCreateUsersTable(db);
 databaseInitArchive.dbCreateFavoritesMoviesTable(db);
 

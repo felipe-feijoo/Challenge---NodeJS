@@ -24,9 +24,6 @@ exports.dbCreateFavoritesMoviesTable = (db) => {
     db.run(`CREATE TABLE IF NOT EXISTS movie (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     api_movie_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
-    original_title TEXT NOT NULL,
-    overview TEXT,
-    added_at TEXT,
-    deleted BOOLEAN NOT NULL CHECK (deleted IN (0, 1))
+    added_at TEXT
     )`);
 };

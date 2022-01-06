@@ -5,7 +5,8 @@ module.exports = (req, res, next) => {
     if(!authHeader){
         return res.status(401).json({ message: 'Not authenticated' });
     }
-    const token = authHeader.split(' ')[1]; 
+
+    const token = authHeader.split(' ')[1];  // The Header comes with the format 'Bearer <token>' so in order to get the token I use split.
     let decodedToken;
     try {
 
@@ -18,6 +19,8 @@ module.exports = (req, res, next) => {
     if (!decodedToken) {
         return res.status(401).json({ message: 'Not authenticated' });
     }
+    //The user ID is appended to the request body
+    req.body.userId= decodedToken.userId;
 
     next();
 };
