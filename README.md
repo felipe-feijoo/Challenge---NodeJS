@@ -1,16 +1,15 @@
 # CHALLENGE NODE JS
 
-This is the solution I came up with for the node.js challenge of Código del Sur.
+This is the solution I came up with for the node.js challenge of Código del Sur.<br>
 It's an API that allows user registration , login, fetch a list with popular movies provided by https://www.themoviedb.org/
 save user's favorite movies and retrieve them.
 
-I used sqlite3 for the DB and objection.js as the ORM.
-
-The server listens on port 8080.
+I used sqlite3 for the DB , objection.js as the ORM, and bcrypt for encrypting the passwords.
 
 For the movies related endpoints, a token must be provided, it is implemented as a Jason Web Token and needs to be included in the Authorization header
 using the Bearer schema, for example :  Headers  {Authorization: Bearer <<'token'>> }.
 
+The server listens on port 8080.
 # Endpoints
 
 ## User related

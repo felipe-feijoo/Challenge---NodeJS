@@ -21,8 +21,6 @@ const app = express();
 //Routes
 const usersRoutes = require('./src/routes/UserRoutes');
 const moviesRoutes = require('./src/routes/MovieRoutes');
-const { dbRefProp } = require('./src/models/User');
-
 
 app.use(bodyParser.json());
 
