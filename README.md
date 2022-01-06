@@ -1,4 +1,4 @@
-# CHALLENGE NODE JS
+# NODE JS CHALLENGE 
 
 This is the solution I came up with for the node.js challenge of Código del Sur.<br>
 It's an API that allows user registration , login, fetch a list with popular movies provided by https://www.themoviedb.org/
