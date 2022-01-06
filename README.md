@@ -9,7 +9,7 @@ I used sqlite3 for the DB and objection.js as the ORM.
 The server listens on port 8080.
 
 For the movies related endpoints, a token must be provided, it is implemented as a Jason Web Token and needs to be included in the Authorization header
-using the Bearer schema, for example :  Headers  {Authorization: Bearer <<token>> }.
+using the Bearer schema, for example :  Headers  {Authorization: Bearer <<'token'>> }.
 
 # Endpoints
 
