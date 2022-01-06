@@ -20,35 +20,39 @@ Allows the user to sign-in , in the request body you must provide email, firstNa
 It has simple input validation.
 
 Request example:
+```JSON
 {
     "email": "123@prueba.com",
     "firstName": "Prueba",
     "lastName": "", 
     "password": "********"
 }
+```
 
 The response looks like this:
+```JSON
 {
     "message": "User created succesfully",
     "newUser": "123@prueba.com"
 }
-
+```
 
 ### POST | /user/login - Parameters (email,password)
 The request body must have email and password, here's an example:
+```JSON
 {
     "email": "123@prueba.com",
     "password": "*******"
 }
-
+```
 
 The response looks like this:
-
+```JSON
 {
     "message": "Login succesful",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEyM0BwcnVlYmEuY29tIiwidXNlcklkIjo1LCJpYXQiOjE2NDE0ODc4ODYsImV4cCI6MTY0MTQ5MTQ4Nn0.JFvzQgnX6ph1RhtWJ9bUy-QpktvPyhQoAM9AfzdQ1Uo"
 }
-
+```
 The token must be included in all the Movie related requests.
 
 
@@ -61,7 +65,7 @@ Returns a list with popular movies, you can provide a url param named "keyword" 
 Request url (with keyword) : localhost:8080/movie/get-list
 
 Response example(without keyword):
-
+```JSON
 {
     "movies": [
         {
@@ -109,12 +113,12 @@ Response example(without keyword):
         },
     ]
 }
-
+```
 
 Request url (with keyword) : localhost:8080/movie/get-list?keyword=venom
 
 Response example (with keyword): 
-
+```JSON
 {
     "movies": [
         {
@@ -177,7 +181,7 @@ Response example (with keyword):
         },
     ]
 }    
-
+```
 
 
 
@@ -185,6 +189,7 @@ Response example (with keyword):
 It returns the list of the user favorite movies,sorted ASC by a new field called suggestionForTodayScore wich is a random number between 0 - 99.
 
 The response look like this:
+```JSON
 {
     "favoriteMovies": [
         {
@@ -311,19 +316,21 @@ The response look like this:
         }
     ]
 }
+```
 
 ### POST | /movie/add-favorite  - Parameters (api_movie_id)  
 POST method that allows the user to save a movie as a favorite, the request body must have the api_movie_id (the id wich identificates the movie in the moviedb.org).
 
 Request example: 
-
+```JSON
 {
     "api_movie_id": 22949
 }
+```
 
 Response example:
-
+```JSON
 {
     "message": "Movie succesfully added to favorites"
 }
-
+```
