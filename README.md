@@ -4,7 +4,7 @@ This is the solution I came up with for the node.js challenge of Código del Sur
 It's an API that allows user registration , login, fetch a list with popular movies provided by https://www.themoviedb.org/
 save user's favorite movies and retrieve them.
 
-I used sqlite3 for the DB , objection.js as the ORM, and bcrypt for encrypting the passwords.
+I used sqlite3 for the DB , objection.js as the ORM, bcrypt for encrypting the passwords, and Jest for the unit testing.
 
 For the movies related endpoints, a token must be provided, it is implemented as a Jason Web Token and needs to be included in the Authorization header
 using the Bearer schema, for example :  Headers  {Authorization: Bearer <<'token'>> }.

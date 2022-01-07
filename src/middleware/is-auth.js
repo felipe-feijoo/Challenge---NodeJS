@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
         return res.status(401).json({ message: 'Not authenticated' });
     }
 
-    const token = authHeader.split(' ')[1];  // The Header comes with the format 'Bearer <token>' so in order to get the token I use split.
+    const token = authHeader.split(' ')[1];  // The Header comes with the format 'Bearer <token>' so in order to get the token split[1] is used.
     let decodedToken;
     try {
 

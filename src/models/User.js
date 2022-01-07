@@ -19,6 +19,7 @@ class User extends Model {
             }
         }
     };
+
     /* Inserts the user in the DB */
     static create = async (email, firstName, lastName, password) => {
         password = await bcrypt.hash(password, 12);
@@ -31,17 +32,24 @@ class User extends Model {
 
         return newUser;
     };
+
     /* Search for the user in the DB, if the user is not found, it returns undefined */
     static findUserByEmail = async (userEmail) => {
-        let existingUser = await User.query().findOne({
-            email: userEmail,
-        });
-        return existingUser;
+        try {
+            let existingUser = await User.query().findOne({
+                email: userEmail,
+            });
+            return existingUser;
+        } catch (error) {
+            
+            return error;
+        }
+
     };
 
-
     /* Validates the inputs for user related actions, the email is the only mandatory parameter*/
-    static validateUser = (email, firstName = '', password = '') => {
+    static validateUser = (email, firstName = undefined, password = undefined) => {
+
         const emailRegex =
             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         let validEmail = true;
@@ -59,14 +67,15 @@ class User extends Model {
             validEmail = false;
             validationMessage += 'You must enter a valid email format: valid@format.com ||';
         }
-        if (firstName != '') {
+
+        if (firstName != undefined) {
             if (firstName.trim().length <= 0) {
                 validFirstName = false;
                 validationMessage += 'The first name field cannot be empty ||';
             }
         }
 
-        if (password != '') {
+        if (password != undefined) {
             if (password.trim().length <= 0) {
                 validPassword = false;
                 validationMessage += '|| The password field cannot be empty ';

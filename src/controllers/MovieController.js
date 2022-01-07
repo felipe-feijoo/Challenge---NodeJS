@@ -44,7 +44,7 @@ exports.addToFavorites = async (req, res, next) => {
         const newFavoriteMovie = await Movie.create(apiMovieId, userId);
         if (newFavoriteMovie != undefined) {
 
-            return res.status(201).json({ message: 'Movie succesfully added to favorites' });
+            return res.status(201).json({ message: 'Movie succesfully added to favorites', favoriteMovie: newFavoriteMovie });
         } else {
             return res.status(400).json({ message: 'The movie is already in user favorites list' });
         }

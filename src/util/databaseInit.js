@@ -1,7 +1,6 @@
 /*
-    This file will be called in index.js to create the tables user and movie.
+    This file iscalled in index.js to create the tables user and movie.
 */
-
 const sqlite3 = require("sqlite3").verbose();
 
 
@@ -10,8 +9,6 @@ exports.db = new sqlite3.Database('src/db/challenge.db', sqlite3.OPEN_READWRITE,
         return console.error(err.message);
     }
 });
-
-
 exports.dbCreateUsersTable = (db) => {
     db.run(`CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     email TEXT NOT NULL UNIQUE,

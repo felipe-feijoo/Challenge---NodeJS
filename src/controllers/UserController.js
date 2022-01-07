@@ -43,12 +43,11 @@ exports.login = async (req, res, next) => {
     try {
         //Checks valid inputs
         let validateEmail = User.validateUser(email);
+
         if (validateEmail.valid) {
             //Checks if the user exists
-            let user = await User.query().findOne({
-                email
-            });
-
+            let user = await User.findUserByEmail(email);
+            
             if (user != undefined) {
                 //Decripts and compares the password stored in the DB with the password provided by the user
                 const passwordMatch = await bcrypt.compare(password, user.password);

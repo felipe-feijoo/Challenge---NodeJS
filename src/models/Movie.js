@@ -22,11 +22,11 @@ class Movie extends Model {
     $beforeInsert() {
         this.added_at = new Date().toISOString();
     }
-    
+
     /* Inserts the movie in the DB */
     static create = async (apiMovieId, userId) => {
 
-        const existingFavoriteForUser = await Movie.query().where('api_movie_id', '=', apiMovieId).where('user_id', '=', userId);
+        const existingFavoriteForUser = getFavoriteMovieByIdAndUser(apiMovieId, userId);
         if (existingFavoriteForUser.length === 0) {
             const newMovie = await Movie.query().insert({
                 api_movie_id: apiMovieId,
@@ -38,6 +38,16 @@ class Movie extends Model {
         }
     };
 
+    /*Returns the movie with the provided id and user */
+    static getFavoriteMovieByIdAndUser = async (apiMovieId, userId) => {
+        try {
+            return await Movie.query().where('api_movie_id', '=', apiMovieId).where('user_id', '=', userId);
+        } catch (error) {
+            return error;
+        }
+
+    }
+
     /* Returns all favorite movies of the user with score and sorted*/
     static getAllFavorites = async (baseUrl, apiKey, userId) => {
 
@@ -46,7 +56,7 @@ class Movie extends Model {
         let detailedMoviesList = new Array();
         let sortedMovies = new Array();
         if (favoriteMovies.length > 0) {
-            await Promise.all(favoriteMovies.map(async movie =>{
+            await Promise.all(favoriteMovies.map(async movie => {
                 let auxMovie = await Movie.getMovieFromApiById(baseUrl, apiKey, movie.api_movie_id);
                 detailedMoviesList.push(auxMovie);
             }));
