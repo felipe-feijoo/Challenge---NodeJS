@@ -1,4 +1,9 @@
 const User = require('../src/models/User');
+const Knex = require('knex');
+//const { Model } = require('objection');
+const knexConfig = require('../src/db/knexfile');
+const knex = Knex(knexConfig);
+User.knex(knex);
 
 describe('Sign In functionality', () => {
 
@@ -34,21 +39,20 @@ describe('Sign In functionality', () => {
         expect(User.validateUser(input.email, input.firstName, input.password)).toEqual(output);
     });
 
-    test("It should prevent an already registered user o sign-in - CASE : Already registered user", () => {
+    test("It should prevent an already registered user to sign-in - CASE : Already registered user", () => {
         const input = {
             email: "felipe@prueba.com"
         };
 
-        expect(User.findUserByEmail(input.email)).not.toBe(undefined);
+        expect(User.findUserByEmail(input.email)).resolves.not.toBe(undefined);
     });
-    test("It should prevent an already registered user o sign-in - CASE : Not registered user", () => {
+
+    test("It should prevent an already registered user to sign-in - CASE : Not registered user", () => {
         const input = {
             email: "anotherTest@prueba.com",
         };
 
-        expect(User.findUserByEmail(input.email)).toMatchObject({});
+        expect(User.findUserByEmail(input.email)).resolves.toBe(undefined);;
     });
-
-
 });
 

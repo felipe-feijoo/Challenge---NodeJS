@@ -1,9 +1,9 @@
 const Movie = require('../src/models/Movie');
 
 
-describe('Get popular movies functionality', () => {
+describe('Get favorite movies functionality', () => {
 
-    test("All movies should have a suggestionForTodayScore field", ()=> {
+    test("All favorite movies should have a suggestionForTodayScore field", () => {
         const input =
             [
                 {
@@ -18,17 +18,17 @@ describe('Get popular movies functionality', () => {
             {
 
                 "id": 29889,
-                "original_title":  "Silent Venom",
+                "original_title": "Silent Venom",
                 "vote_average": 5.5,
                 "vote_count": 23,
                 "suggestionForTodayScore": expect.anything()
             }
         ];
 
-        expect(Movie.generateUserScore(input,'favorite')).toMatchObject(output);
+        expect(Movie.generateUserScore(input, 'favorite')).toMatchObject(output);
     });
 
-    test("All movies should sorted by suggestionForTodayScore field ASC", ()=> {
+    test("All favorite movies should sorted by suggestionForTodayScore field ASC", () => {
         const input =
             [
                 {
@@ -53,7 +53,7 @@ describe('Get popular movies functionality', () => {
                     "suggestionForTodayScore": 85
                 }];
 
-        const output =             [
+        const output = [
             {
                 "id": 29889,
                 "original_title": "Silent Venom",
@@ -76,7 +76,7 @@ describe('Get popular movies functionality', () => {
                 "suggestionForTodayScore": 31
             }];
 
-        expect(Movie.sortByScoreASC(input,'favorite')).toMatchObject(output);
+        expect(Movie.sortByScoreASC(input, 'favorite')).toMatchObject(output);
     });
 
 

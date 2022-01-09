@@ -79,6 +79,4 @@ describe('Get popular movies functionality', () => {
         expect(Movie.sortByScoreASC(input)).toMatchObject(output);
     });
 
-
-
 });

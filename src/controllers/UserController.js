@@ -30,7 +30,7 @@ exports.createUser = async (req, res, next) => {
             return res.status(400).json({ message: 'Please provide valid information', details: validateUser.validationMessage });
         }
     } catch (error) {
-        res.status(500).json({ message: 'Internal error on creating', error: JSON.stringify(error) });
+        res.status(500).json({ message: 'Internal error on creating', error: error.message });
     }
 };
 //POST
@@ -67,7 +67,7 @@ exports.login = async (req, res, next) => {
 
 
     } catch (error) {
-        return res.status(500).json({ message: 'Internal error at login', error: JSON.stringify(error) });
+        return res.status(500).json({ message: 'Internal error at login', error: error.message });
     }
 
 };

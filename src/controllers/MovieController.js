@@ -11,7 +11,7 @@ exports.listMovies = async (req, res, next) => {
 
         return res.status(200).json({ movies: movies });
     } catch (error) {
-        return res.status(500).json({ message: 'Error while trying to get the movies list', error: JSON.stringify(error) });
+        return res.status(500).json({ message: 'Error while trying to get the movies list', error: error.message });
     }
 };
 //GET  
@@ -25,7 +25,7 @@ exports.listFavoriteMovies = async (req, res, next) => {
         }
         return res.status(200).json({ favoriteMovies: favoriteList });
     } catch (error) {
-        return res.status(500).json({ message: 'Error while trying to get the favorites list', error: error });
+        return res.status(500).json({ message: 'Error while trying to get the favorites list', error: error.message });
     }
 };
 //POST  
@@ -37,19 +37,20 @@ exports.addToFavorites = async (req, res, next) => {
     const userId = body.userId;
 
     if (!apiMovieId || !userId) {
-        return res.status(400).json({ message: 'One or more of the parameters required are missing' });
+        return res.status(400).json({ message: 'One or more required parameters are missing' });
     }
 
     try {
         const newFavoriteMovie = await Movie.create(apiMovieId, userId);
-        if (newFavoriteMovie != undefined) {
 
+        if (newFavoriteMovie != undefined) {
             return res.status(201).json({ message: 'Movie succesfully added to favorites', favoriteMovie: newFavoriteMovie });
         } else {
             return res.status(400).json({ message: 'The movie is already in user favorites list' });
         }
     } catch (error) {
-
-        return res.status(500).json({ message: 'Error while trying to add the movie to favorites list', error: error });
+        console.log(typeof(error));
+        
+        return res.status(500).json({ message: 'Error while trying to add the movie to favorites list', error: error.message });
     }
 };

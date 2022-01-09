@@ -35,16 +35,10 @@ class User extends Model {
 
     /* Search for the user in the DB, if the user is not found, it returns undefined */
     static findUserByEmail = async (userEmail) => {
-        try {
-            let existingUser = await User.query().findOne({
-                email: userEmail,
-            });
-            return existingUser;
-        } catch (error) {
-            
-            return error;
-        }
-
+        let existingUser = await User.query().findOne({
+            email: userEmail,
+        });
+        return existingUser;
     };
 
     /* Validates the inputs for user related actions, the email is the only mandatory parameter*/

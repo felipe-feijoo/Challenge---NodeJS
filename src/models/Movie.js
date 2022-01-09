@@ -26,26 +26,21 @@ class Movie extends Model {
     /* Inserts the movie in the DB */
     static create = async (apiMovieId, userId) => {
 
-        const existingFavoriteForUser = getFavoriteMovieByIdAndUser(apiMovieId, userId);
+        const existingFavoriteForUser = await Movie.getFavoriteMovieByIdAndUser(apiMovieId, userId);
+
         if (existingFavoriteForUser.length === 0) {
             const newMovie = await Movie.query().insert({
                 api_movie_id: apiMovieId,
                 user_id: userId,
             });
             return newMovie;
-        } else {
-            return undefined;
         }
+        return undefined;
     };
 
     /*Returns the movie with the provided id and user */
     static getFavoriteMovieByIdAndUser = async (apiMovieId, userId) => {
-        try {
-            return await Movie.query().where('api_movie_id', '=', apiMovieId).where('user_id', '=', userId);
-        } catch (error) {
-            return error;
-        }
-
+        return await Movie.query().where('api_movie_id', '=', apiMovieId).where('user_id', '=', userId);
     }
 
     /* Returns all favorite movies of the user with score and sorted*/
@@ -71,14 +66,11 @@ class Movie extends Model {
     static getMovieFromApiById = async (baseURL, apiKey, movieId) => {
 
         let fetchURL = `${baseURL}/movie/${movieId}?api_key=${apiKey}`;
-        try {
-            const response = await fetch(fetchURL);
-            const data = await response.json();
-            return data;
 
-        } catch (error) {
-            return console.log(JSON.stringify(error));
-        }
+        const response = await fetch(fetchURL);
+        const data = await response.json();
+        return data;
+
     }
 
     /* Fetches the data from themoviedb.org , if a keyword is provided, it fetches a list of movies that contains 
@@ -92,17 +84,11 @@ class Movie extends Model {
             fetchURL += `movie/popular?api_key=${apiKey}&page=1`;
         }
 
-        try {
-            const response = await fetch(fetchURL);
-            const data = await response.json();
-            const scoredMovies = Movie.generateUserScore(data.results);
-            const sortedMovies = Movie.sortByScoreASC(scoredMovies);
-            return sortedMovies;
-
-        } catch (error) {
-            return console.log(JSON.stringify(error));
-        }
-
+        const response = await fetch(fetchURL);
+        const data = await response.json();
+        const scoredMovies = Movie.generateUserScore(data.results);
+        const sortedMovies = Movie.sortByScoreASC(scoredMovies);
+        return sortedMovies;
     };
 
     /* Generates a random score between 0 and 99 for the movies  */
